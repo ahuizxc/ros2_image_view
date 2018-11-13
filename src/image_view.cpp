@@ -52,6 +52,8 @@ cv::Mat g_last_image;
 boost::format g_filename_format;
 std::mutex g_image_mutex;
 std::string g_window_name;
+std::string transport;
+std::string topic;
 bool g_gui;
 image_transport::Publisher g_pub;
 bool g_do_dynamic_scaling;
@@ -132,8 +134,9 @@ int main(int argc, char **argv)
 {
   rclcpp::init(argc, argv);
   
-  std::string topic = argv[1];
-  std::string transport = argv[2];
+  topic = argv[1];
+  if (argc == 3)
+    transport = argv[2];
   // auto topic = std::string("/camera/color/image_raw");
   node = rclcpp::Node::make_shared("image_view");
   // Default window name is the resolved topic name
