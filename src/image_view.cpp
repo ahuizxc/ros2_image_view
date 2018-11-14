@@ -89,7 +89,6 @@ void imageCb(const sensor_msgs::msg::Image::ConstSharedPtr & msg)
     cv_ptr = cv_bridge::cvtColorForDisplay(cv_bridge::toCvShare(msg), "", options);
     g_last_image = cv_ptr->image;
   } catch (cv_bridge::Exception& e) {
-    std::cout << "error" << std::endl;
     RCLCPP_ERROR(node->get_logger(), "Unable to convert '%s' image for display: '%s'",
                        msg->encoding.c_str(), e.what());
   }
