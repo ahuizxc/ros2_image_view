@@ -51,7 +51,8 @@ ament_target_dependencies(image_view
   OpenCV
   Boost
 )
-add_executable(stereo_view src/image_view.cpp)
+
+add_executable(stereo_view src/stereo_view.cpp)
 ament_target_dependencies(stereo_view
   image_transport
   image_geometry
@@ -66,10 +67,25 @@ ament_target_dependencies(stereo_view
   Boost
 )
 
+add_executable(extract_images src/extract_images.cpp)
+ament_target_dependencies(extract_images
+  image_transport
+  image_geometry
+  cv_bridge
+  message_filters
+  rclcpp
+  stereo_msgs
+  sensor_msgs
+  rmw_implementation
+  cv_bridge
+  OpenCV
+  Boost
+)
 
 install(TARGETS 
         image_view
         stereo_view
+        extract_images
         DESTINATION lib/${PROJECT_NAME})      
   
 ament_package()

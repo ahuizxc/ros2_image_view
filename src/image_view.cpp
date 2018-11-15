@@ -42,6 +42,8 @@
 
 #include <thread>
 #include <exception> 
+#include <memory>
+#include <string>
 #include <boost/format.hpp>
 // #include <boost/thread.hpp>
 #include <boost/filesystem.hpp>
@@ -180,7 +182,7 @@ int main(int argc, char **argv)
   RCLCPP_INFO(node->get_logger(), "Image topic \"%s\"", topic.c_str());
   std::shared_ptr<image_transport::ImageTransport> it;
   it.reset(new image_transport::ImageTransport(node));
-  image_transport::TransportHints hints(node, "raw");
+  image_transport::TransportHints hints(node, transport);
   image_transport::Subscriber sub;
   sub = it->subscribe(topic, 1, &imageCb, node, &hints);
   g_pub = it->advertise("output", 1);

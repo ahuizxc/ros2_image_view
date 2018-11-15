@@ -402,7 +402,7 @@ public:
              disparity_topic.c_str());
 
     // Subscribe to three input topics.
-    image_transport::TransportHints hints(node, "raw");
+    image_transport::TransportHints hints(node, transport);
     left_sub_.subscribe(node, left_topic, hints.getTransport());
     right_sub_.subscribe(node, right_topic, hints.getTransport());
     disparity_sub_.subscribe(node, disparity_topic);
