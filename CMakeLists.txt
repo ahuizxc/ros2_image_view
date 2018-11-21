@@ -28,6 +28,7 @@ find_package(tf2_ros REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(Boost REQUIRED COMPONENTS signals system filesystem)
 find_package(GTK2)
+find_package(std_srvs REQUIRED)
 add_definitions(-DHAVE_GTK)
 include_directories(${GTK2_INCLUDE_DIRS})
 
@@ -82,10 +83,41 @@ ament_target_dependencies(extract_images
   Boost
 )
 
+add_executable(image_saver src/image_saver.cpp)
+ament_target_dependencies(image_saver
+  image_transport
+  image_geometry
+  cv_bridge
+  std_srvs
+  message_filters
+  rclcpp
+  stereo_msgs
+  sensor_msgs
+  rmw_implementation
+  cv_bridge
+  OpenCV
+  Boost
+)
+
+add_executable(video_recorder src/video_recorder.cpp)
+ament_target_dependencies(video_recorder
+  image_transport
+  image_geometry
+  cv_bridge
+  std_srvs
+  rclcpp
+  sensor_msgs
+  rmw_implementation
+  cv_bridge
+  OpenCV
+  Boost
+)
+
 install(TARGETS 
         image_view
         stereo_view
         extract_images
+        image_saver
+        video_recorder
         DESTINATION lib/${PROJECT_NAME})      
-  
 ament_package()

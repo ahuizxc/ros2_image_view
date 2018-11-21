@@ -47,6 +47,7 @@
 
 #include <thread>
 #include <memory>
+#include <vector>
 #include <boost/format.hpp>
 
 #ifdef HAVE_GTK
