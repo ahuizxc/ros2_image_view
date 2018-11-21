@@ -38,7 +38,7 @@ endif()
 
 
 
-add_executable(image_view src/image_view.cpp)
+add_executable(image_view src/nodes/image_view.cpp)
 ament_target_dependencies(image_view
   image_transport
   image_geometry
@@ -53,7 +53,7 @@ ament_target_dependencies(image_view
   Boost
 )
 
-add_executable(stereo_view src/stereo_view.cpp)
+add_executable(stereo_view src/nodes/stereo_view.cpp)
 ament_target_dependencies(stereo_view
   image_transport
   image_geometry
@@ -68,7 +68,7 @@ ament_target_dependencies(stereo_view
   Boost
 )
 
-add_executable(extract_images src/extract_images.cpp)
+add_executable(extract_images src/nodes/extract_images.cpp)
 ament_target_dependencies(extract_images
   image_transport
   image_geometry
@@ -83,7 +83,7 @@ ament_target_dependencies(extract_images
   Boost
 )
 
-add_executable(image_saver src/image_saver.cpp)
+add_executable(image_saver src/nodes/image_saver.cpp)
 ament_target_dependencies(image_saver
   image_transport
   image_geometry
@@ -99,7 +99,7 @@ ament_target_dependencies(image_saver
   Boost
 )
 
-add_executable(video_recorder src/video_recorder.cpp)
+add_executable(video_recorder src/nodes/video_recorder.cpp)
 ament_target_dependencies(video_recorder
   image_transport
   image_geometry
