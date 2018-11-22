@@ -36,10 +36,32 @@ if(cv_bridge_VERSION VERSION_GREATER "1.12.0")
   add_compile_options(-std=c++11)
 endif()
 
+add_library(${PROJECT_NAME} SHARED
+            src/nodelets/disparity_node.cpp
+            src/nodelets/window_thread.cpp)
 
+ament_target_dependencies(${PROJECT_NAME}
+  image_transport
+  image_geometry
+  cv_bridge
+  std_srvs
+  rclcpp
+  sensor_msgs
+  stereo_msgs
+  rmw_implementation
+  cv_bridge
+  OpenCV
+  Boost
+)
+rclcpp_register_node_plugins(${PROJECT_NAME} "${PROJECT_NAME}::DisparityNode")
 
-add_executable(image_view src/nodes/image_view.cpp)
-ament_target_dependencies(image_view
+install(TARGETS ${PROJECT_NAME}
+        DESTINATION lib
+)
+
+add_executable(image_view_exe 
+               src/nodes/image_view.cpp)
+ament_target_dependencies(image_view_exe
   image_transport
   image_geometry
   cv_bridge
@@ -114,10 +136,13 @@ ament_target_dependencies(video_recorder
 )
 
 install(TARGETS 
-        image_view
+        image_view_exe
         stereo_view
         extract_images
         image_saver
         video_recorder
-        DESTINATION lib/${PROJECT_NAME})      
+        DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY examples/launch
+  DESTINATION share/${PROJECT_NAME}/
+)
 ament_package()
